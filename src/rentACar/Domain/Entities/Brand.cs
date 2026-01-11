@@ -6,11 +6,15 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
 
+        public ICollection<Model> Models { get; set; }
+
         public Brand()
         {
-            
+
+            Models = new HashSet<Model>();
+
         }
-        public Brand(Guid id,string name)
+        public Brand(Guid id, string name) : this()
         {
             id = id;
             name = name;
