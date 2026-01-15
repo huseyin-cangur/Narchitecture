@@ -1,6 +1,9 @@
 using Application;
 using Persistence;
 using WebAPI.Extensions;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,8 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
+
+
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +30,8 @@ if (app.Environment.IsDevelopment())
         opt.SwaggerEndpoint("/swagger/v1/swagger.json", "CloudMops API v1");
     });
 }
+// if(app.Environment.IsProduction())
+app.ConfigureCustomExtensionMiddleware();
 
 app.UseHttpsRedirection();
 
